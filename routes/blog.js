@@ -3,8 +3,10 @@ const router = express.Router();
 const Blog = require("../model/blog");
 const path = require("path");
 
+
+//create new blog
 router.post("/", async (req, res) => {
-  const { title, content, author } = req.body;
+  const { title, content, author } = req.body; 
 
   try {
     if (!title || !content || !author) {
@@ -17,6 +19,8 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+//get all blogs
 router.get("/", async (req, res) => {
   try {
     const blog = await Blog.find();
@@ -26,7 +30,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-
+//get blog by id
 router.get('/:id',async(req,res) => {
     try {
         const id = req.params.id
@@ -37,13 +41,13 @@ router.get('/:id',async(req,res) => {
         else{
           return  res.status(201).json({blog})
         }
-        // const blog = await
+        
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
     }
 })
 
-
+// update a blog
 router.put('/:id', async (req, res) => {
     try {
       const { title, content } = req.body;
@@ -66,6 +70,8 @@ router.put('/:id', async (req, res) => {
   });
   
 
+
+  // delete a blog
   router.delete('/:id',async(req,res) => {
     try {
         const blog = await Blog.findByIdAndDelete({_id:req.params.id})

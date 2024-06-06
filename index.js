@@ -1,3 +1,4 @@
+//import dependency
 const express = require("express");
 const app = express();
 const connectDB = require("./connectDB/connectDb");
@@ -6,6 +7,8 @@ const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
+
+//setting up middleware
 app.set("trust proxy", 1);
 require('dotenv').config()
 
@@ -30,19 +33,22 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
-
+//any route that doesn't exist
 app.use('*', (req, res) => {
     res.status(404).json({ message: 'Page Not Found' });
   });
   
-
+//defining my port
 const port = process.env.PORT || 3000;
 
+//route to access the blog
 app.use('/api/posts', blog)
+
+//function to connect to mongodb database atlas and listen on port
 const start = async () => {
   await connectDB(process.env.Mongo_Url);
   app.listen(port, () => {
-    console.log("listening on 3000");
+    console.log(`listening on ${port}`);
   });
 };
 start();
