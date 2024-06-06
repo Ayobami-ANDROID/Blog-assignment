@@ -34,15 +34,17 @@ app.get("/", (req, res) => {
 app.use(express.json());
 
 //any route that doesn't exist
-app.use('*', (req, res) => {
-    res.status(404).json({ message: 'Page Not Found' });
-  });
+
   
 //defining my port
 const port = process.env.PORT || 3000;
 
 //route to access the blog
 app.use('/api/posts', blog)
+
+app.use('*', (req, res) => {
+    res.status(404).json({ message: 'Page Not Found' });
+  });
 
 //function to connect to mongodb database atlas and listen on port
 const start = async () => {
