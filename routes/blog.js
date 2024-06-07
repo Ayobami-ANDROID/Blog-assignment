@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
     const blog = await Blog.create(req.body);
     return res.status(201).json({ blog });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 });
 
@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
     const blog = await Blog.find();
     res.status(201).json({ blog });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 });
 
@@ -36,14 +36,14 @@ router.get('/:id',async(req,res) => {
         const id = req.params.id
         const blog = await Blog.findById(id)
         if(!blog){
-          return  res.status(404).json({message:"Blog not found"})
+          return  res.status(404).json({msg:"Blog not found"})
         }
         else{
           return  res.status(201).json({blog})
         }
         
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error" });
+        res.status(500).json({ msg: "Internal Server Error" });
     }
 })
 
@@ -65,7 +65,7 @@ router.put('/:id', async (req, res) => {
         res.status(201).json({ msg: "Blog Updated", blog });
       }
     } catch (error) {
-      res.status(500).json({ message: "Internal Server Error" });
+      res.status(500).json({ msg: "Internal Server Error" });
     }
   });
   
@@ -76,11 +76,11 @@ router.put('/:id', async (req, res) => {
     try {
         const blog = await Blog.findByIdAndDelete({_id:req.params.id})
         if(!blog){
-            res.status(404).json({ message: "Blog Not Found" });
+            res.status(404).json({ msg: "Blog Not Found" });
         }
         res.status(204)
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error" });
+        res.status(500).json({ msg: "Internal Server Error" });
     }
   })
 

@@ -43,7 +43,7 @@ const port = process.env.PORT || 3000;
 app.use('/api/posts', blog)
 
 app.use('*', (req, res) => {
-    res.status(404).json({ message: 'Page Not Found' });
+    res.status(404).json({ msg: 'Page Not Found' });
   });
 
 //function to connect to mongodb database atlas and listen on port
