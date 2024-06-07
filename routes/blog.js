@@ -60,7 +60,7 @@ router.put('/:id', async (req, res) => {
         { new: true, runValidators: true }
       );
       if (!blog) {
-        return res.status(404).json({ message: "Blog Not Found" });
+        return res.status(404).json({ msg: "Blog Not Found" });
       } else {
         res.status(201).json({ msg: "Blog Updated", blog });
       }
